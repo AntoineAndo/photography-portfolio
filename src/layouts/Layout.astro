@@ -5,11 +5,11 @@ import "../styles/global.css";
 
 <!doctype html>
 <html lang="en">
-  <head>
+  <head slot="head">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Antoine Ando Photography</title>
     <ViewTransitions />
+    <slot name="head" />
   </head>
   <body>
     <header>
@@ -28,7 +28,7 @@ import "../styles/global.css";
       </nav>
     </header>
     <main>
-      <slot />
+      <slot name="body" />
     </main>
     <style lang="scss">
       @font-face {

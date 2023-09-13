@@ -3,6 +3,7 @@ import { useSanityClient } from "@sanity/astro";
 
 import Layout from "../layouts/Layout.astro";
 import CategoryPill from "../components/CategoryPill/CategoryPill.astro";
+import { SEO } from "astro-seo";
 
 const client = useSanityClient();
 
@@ -16,7 +17,12 @@ let images = await client.fetch(`*[_type == 'imageContent']{
 ---
 
 <Layout>
-  <div class="content">
+  <SEO
+    slot="head"
+    title="Antoine Ando Photography Homepage"
+    description="A heavily optimized description full of well-researched keywords."
+  />
+  <div class="content" slot="body">
     <!-- <h1 transition:name="title">Hello World</h1> -->
     <div class="categories">
       <CategoryPill name="Category 1" />
