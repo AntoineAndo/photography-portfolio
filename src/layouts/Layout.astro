@@ -8,14 +8,15 @@ import { ViewTransitions } from "astro:transitions";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Antoine Ando Photography</title>
-    <!-- <ViewTransitions /> -->
+    <link rel="stylesheet" href="/src/style/reset.css" />
+    <ViewTransitions />
   </head>
   <body>
     <header>
       <nav>
         <ul>
           <li>
-            <a href="/"> Home</a>
+            <a href="/" class="home">Antoine Ando</a>
           </li>
           <li>
             <a href="/about"> About</a>
@@ -30,36 +31,93 @@ import { ViewTransitions } from "astro:transitions";
       <slot />
     </main>
     <style lang="scss">
+      @font-face {
+        font-family: "SpaceMonoBold";
+        src: url("/SpaceMono-Bold.ttf");
+      }
+
+      @font-face {
+        font-family: "SpaceMono";
+        src: url("/SpaceMono-Regular.ttf");
+      }
+
       body {
         margin: 0;
-        height: 100vh;
+        // height: 100vh;
         display: grid;
         grid-template-rows: auto 1fr;
+        background-image: url("/graindient.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        // background-attachment: fixed;
+        font-family: "SpaceMono";
+        padding: 3rem;
+        gap: 2rem;
+
+        @media (max-width: 600px) {
+          padding: 2rem;
+        }
 
         header {
-          background-color: green;
+          background-color: white;
           position: sticky;
 
           nav {
             padding: 0;
+            font-size: 2rem;
 
             ul {
               text-decoration: none;
               margin: 0;
               display: flex;
               gap: 1rem;
+              margin: 1rem;
+
+              @media (max-width: 600px) {
+                flex-direction: column;
+              }
 
               li {
-                display: flex;
-                align-items: center;
-                height: 4rem;
+                // display: flex;
+                // align-items: center;
+                // height: 4rem;
+                position: relative;
+
+                &:hover:before {
+                  width: 100%;
+                  transition: width 0.1s linear;
+                }
+
+                &:before {
+                  content: "";
+                  position: absolute;
+                  bottom: -3px;
+                  right: 0;
+                  left: 0;
+                  margin: auto;
+                  height: 2px;
+                  width: 0%;
+                  background-color: black;
+                  transition: width 0.1s linear;
+                }
+
+                a {
+                  text-decoration: none;
+                  color: inherit;
+                  font-size: 1.5rem;
+                  position: relative;
+
+                  &.home {
+                    font-size: 2rem;
+                    font-family: "SpaceMonoBold";
+                  }
+                }
               }
             }
           }
         }
 
         main {
-          background-color: red;
         }
       }
     </style>
