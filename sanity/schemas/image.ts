@@ -16,6 +16,15 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'slug',
+      title: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
