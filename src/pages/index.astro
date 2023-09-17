@@ -3,81 +3,29 @@ import { useSanityClient } from "@sanity/astro";
 
 import Layout from "../layouts/Layout.astro";
 import CategoryPill from "../components/CategoryPill/CategoryPill.astro";
+import ImageGallery from "../components/ImageGallery/ImageGallery";
+import { SEO } from "astro-seo";
 
-const client = useSanityClient();
+// const client = useSanityClient();
 
-let images = await client.fetch(`*[_type == 'imageContent']{
-                                                title,
-                                                "slug": slug.current,
-                                                "imageUrl": imageField.asset->url
-                                              }`);
+// let images = await client.fetch(`*[_type == 'imageContent']{
+//                                                 title,
+//                                                 "slug": slug.current,
+//                                                 "imageUrl": imageField.asset->url
+//                                               }`);
 
 // images = [];
 ---
 
 <Layout>
-  <div class="content">
+  <SEO
+    slot="head"
+    title="Antoine Ando Photography Homepage"
+    description="A heavily optimized description full of well-researched keywords."
+  />
+  <div class="content" slot="body">
     <!-- <h1 transition:name="title">Hello World</h1> -->
-    <div class="categories">
-      <CategoryPill name="Category 1" />
-      <CategoryPill name="Category 2" />
-    </div>
-    <div class="grid">
-      <div class="col">
-        {
-          images.map(({ title, imageUrl, slug }: any, i: number) => {
-            if (i % 3 == 0) {
-              return (
-                <a href={`/image/${slug}`}>
-                  <img
-                    src={`${imageUrl}?w=1000`}
-                    alt={title}
-                    loading="lazy"
-                    transition:name={slug}
-                  />
-                </a>
-              );
-            }
-          })
-        }
-      </div>
-      <div class="col">
-        {
-          images.map(({ title, imageUrl, slug }: any, i: number) => {
-            if (i % 3 == 1) {
-              return (
-                <a href={`/image/${slug}`}>
-                  <img
-                    src={`${imageUrl}?w=1000`}
-                    alt={title}
-                    loading="lazy"
-                    transition:name={slug}
-                  />
-                </a>
-              );
-            }
-          })
-        }
-      </div>
-      <div class="col test_test">
-        {
-          images.map(({ title, imageUrl, slug }: any, i: number) => {
-            if (i % 3 == 2) {
-              return (
-                <a href={`/image/${slug}`}>
-                  <img
-                    src={`${imageUrl}?w=1000`}
-                    alt={title}
-                    loading="lazy"
-                    transition:name={slug}
-                  />
-                </a>
-              );
-            }
-          })
-        }
-      </div>
-    </div>
+    <ImageGallery client:load />
   </div>
 </Layout>
 

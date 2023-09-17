@@ -1,0 +1,17 @@
+
+.pill {
+    border: solid 1px white;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+input {
+  display: none;
+}
+
+input:checked ~ .pill {
+  background-color: white;
+  color: black;
+}
