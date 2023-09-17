@@ -1,30 +1,21 @@
----
-const { name, onClick } = Astro.props;
-console.log(onClick);
----
+import React from "react";
+import "./CategoryPill.scss";
 
-<div>
-  <input type="radio" name="selected-category" id={name} value={name} />
-  <label for={name} class="pill">
-    {name}
-  </label>
-</div>
+function CategoryPill({ name, onClick }: any) {
+  return (
+    <div>
+      <input
+        type="radio"
+        name="category-radio"
+        id={name}
+        value={name}
+        onChange={onClick}
+      />
+      <label htmlFor={name} className="pill">
+        {name}
+      </label>
+    </div>
+  );
+}
 
-<style lang="scss">
-  .pill {
-    border: solid 1px white;
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  input {
-    display: none;
-  }
-
-  input:checked ~ .pill {
-    background-color: white;
-    color: black;
-  }
-</style>
+export default CategoryPill;
