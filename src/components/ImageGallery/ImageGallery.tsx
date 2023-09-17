@@ -10,11 +10,13 @@ function ImageGallery() {
     undefined
   );
 
+  console.log(import.meta.env?.PUBLIC_SANITY_TOKEN);
+
   const client = createClient({
     apiVersion: "2023-02-08",
     dataset: "production",
     projectId: "bgp3zmck",
-    token: import?.meta?.env?.PUBLIC_SANITY_TOKEN ?? process?.env?.PUBLIC_SANITY_TOKEN,
+    token: import.meta.env?.PUBLIC_SANITY_TOKEN,
   });
 
   // List all the categories
