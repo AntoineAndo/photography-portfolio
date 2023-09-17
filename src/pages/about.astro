@@ -5,14 +5,16 @@ const photos = await response.json();
 ---
 
 <Layout>
-  <div class="content">
+  <div class="content" slot="body">
     <h1 transition:name="title">About</h1>
+    <p></p>
   </div>
 </Layout>
 
 <style lang="scss">
   .content {
     background-color: yellow;
+    padding: 1rem;
 
     h1 {
       color: blue;

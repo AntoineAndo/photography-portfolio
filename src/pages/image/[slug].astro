@@ -27,7 +27,7 @@ const { title, imageUrl } = Astro.props;
 <Layout>
   <!-- <h1>{slug}</h1> -->
   <!-- <div class="row"> -->
-  <div class="col">
+  <div class="col" slot="body">
     <div class="imageContainer">
       <img src=`${imageUrl}?w=1000` alt="" class="image" />
     </div>
@@ -36,7 +36,6 @@ const { title, imageUrl } = Astro.props;
       <p>lorem ipsum</p>
     </div>
   </div>
-  <!-- </div> -->
 </Layout>
 
 <style lang="scss">
