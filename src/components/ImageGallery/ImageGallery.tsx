@@ -14,6 +14,7 @@ function ImageGallery() {
     apiVersion: "2023-02-08",
     dataset: "production",
     projectId: "bgp3zmck",
+    token: import.meta.env?.PUBLIC_SANITY_TOKEN,
   });
 
   // List all the categories
