@@ -83,24 +83,6 @@ import "../styles/global.css";
                 // height: 4rem;
                 position: relative;
 
-                &:hover:before {
-                  width: 100%;
-                  transition: width 0.1s linear;
-                }
-
-                &:before {
-                  content: "";
-                  position: absolute;
-                  bottom: -3px;
-                  right: 0;
-                  left: 0;
-                  margin: auto;
-                  height: 2px;
-                  width: 0%;
-                  background-color: black;
-                  transition: width 0.1s linear;
-                }
-
                 a {
                   text-decoration: none;
                   color: inherit;
@@ -110,6 +92,24 @@ import "../styles/global.css";
                   &.home {
                     font-size: 2rem;
                     font-family: "SpaceMonoBold";
+                  }
+
+                  &:hover:before {
+                    width: 100%;
+                    transition: width 0.1s linear;
+                  }
+
+                  &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: -3px;
+                    right: 0;
+                    left: 0;
+                    margin: auto;
+                    height: 2px;
+                    width: 0%;
+                    background-color: black;
+                    transition: width 0.1s linear;
                   }
                 }
               }
