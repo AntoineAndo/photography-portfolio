@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CategoryPill from "../CategoryPill/CategoryPill";
 import "./ImageGallery.scss";
 import useSWR from "swr";
@@ -9,6 +9,8 @@ function ImageGallery() {
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
     undefined
   );
+
+  const [numberColumns, setNumberColumns] = useState<number>(1);
 
   const client = createClient({
     apiVersion: "2023-02-08",
@@ -66,6 +68,23 @@ function ImageGallery() {
     fallbackData: [],
   });
 
+  // Window resize listener
+  useEffect(() => {
+    const initialColumnNumber =
+      window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
+    setNumberColumns(initialColumnNumber);
+
+    const handleResize = (e: any) => {
+      const newColNb =
+        window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
+
+      console.log(newColNb);
+
+      setNumberColumns(newColNb);
+    };
+    return window.addEventListener("resize", handleResize);
+  }, []);
+
   if (error) {
     return <span>Something went wrong...</span>;
   }
@@ -74,6 +93,35 @@ function ImageGallery() {
     const value: string = e.target.value;
     setSelectedCategory(value);
   };
+
+  const renderColumns = useCallback(() => {
+    const cols = [];
+    for (let j = 0; j < numberColumns; j++) {
+      cols.push(
+        <div className="col">
+          {images?.map(({ title, imageUrl, slug }: any, i: number) => {
+            if (i % numberColumns == j) {
+              return (
+                <a href={`/image/${slug}`}>
+                  <img
+                    src={`${imageUrl}?w=1000`}
+                    alt={title}
+                    loading="lazy"
+                    onLoad={(e: any) => {}}
+                  />
+                </a>
+              );
+            }
+          })}
+        </div>
+      );
+    }
+
+    return cols;
+  }, [images, numberColumns]);
+
+  // const renderColumns = () => {
+  // };
 
   return (
     <>
@@ -90,53 +138,7 @@ function ImageGallery() {
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <div className="grid">
-          <div className="col">
-            {images?.map(({ title, imageUrl, slug }: any, i: number) => {
-              if (i % 3 == 0) {
-                return (
-                  <a href={`/image/${slug}`}>
-                    <img
-                      src={`${imageUrl}?w=1000`}
-                      alt={title}
-                      loading="lazy"
-                    />
-                  </a>
-                );
-              }
-            })}
-          </div>
-          <div className="col">
-            {images?.map(({ title, imageUrl, slug }: any, i: number) => {
-              if (i % 3 == 1) {
-                return (
-                  <a href={`/image/${slug}`}>
-                    <img
-                      src={`${imageUrl}?w=1000`}
-                      alt={title}
-                      loading="lazy"
-                    />
-                  </a>
-                );
-              }
-            })}
-          </div>
-          <div className="col test_test">
-            {images?.map(({ title, imageUrl, slug }: any, i: number) => {
-              if (i % 3 == 2) {
-                return (
-                  <a href={`/image/${slug}`}>
-                    <img
-                      src={`${imageUrl}?w=1000`}
-                      alt={title}
-                      loading="lazy"
-                    />
-                  </a>
-                );
-              }
-            })}
-          </div>
-        </div>
+        <div className="grid">{renderColumns()}</div>
       )}
     </>
   );
