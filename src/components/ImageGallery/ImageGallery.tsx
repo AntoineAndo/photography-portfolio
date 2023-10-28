@@ -78,8 +78,6 @@ function ImageGallery() {
       const newColNb =
         window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
 
-      console.log(newColNb);
-
       setNumberColumns(newColNb);
     };
     return window.addEventListener("resize", handleResize);
@@ -91,7 +89,7 @@ function ImageGallery() {
 
   const categoryClick = (e: any) => {
     const value: string = e.target.value;
-    setSelectedCategory(value);
+    setSelectedCategory(value != "x" ? value : undefined);
   };
 
   const renderColumns = useCallback(() => {
@@ -133,6 +131,11 @@ function ImageGallery() {
           categories.map(({ title }: any) => {
             return <CategoryPill name={title} onClick={categoryClick} />;
           })
+        )}
+
+        {/* If a category is selected, show the button to reset */}
+        {selectedCategory && (
+          <CategoryPill name={"x"} onClick={categoryClick} />
         )}
       </div>
       {isLoading ? (

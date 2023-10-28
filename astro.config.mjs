@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/serverless";
-import vercelStatic from "@astrojs/vercel/static";
 
 import prefetch from "@astrojs/prefetch";
 
@@ -16,6 +15,6 @@ export default defineConfig({
     }),
     react(),
   ],
-  output: "static",
-  adapter: vercelStatic(),
+  output: "server",
+  adapter: vercel(),
 });

@@ -9,7 +9,7 @@ function CategoryPill({ name, onClick }: any) {
         name="category-radio"
         id={name}
         value={name}
-        onChange={onClick}
+        onClick={onClick}
       />
       <label htmlFor={name} className="pill">
         {name}
