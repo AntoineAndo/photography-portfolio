@@ -74,7 +74,8 @@ import "../styles/global.css";
               margin: 1rem;
 
               @media (max-width: 600px) {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
               }
 
               li {
@@ -82,6 +83,12 @@ import "../styles/global.css";
                 // align-items: center;
                 // height: 4rem;
                 position: relative;
+
+                &:has(.home) {
+                  @media (max-width: 600px) {
+                    width: 100%;
+                  }
+                }
 
                 a {
                   text-decoration: none;
@@ -92,6 +99,7 @@ import "../styles/global.css";
                   &.home {
                     font-size: 2rem;
                     font-family: "SpaceMonoBold";
+                    width: 500px;
                   }
 
                   &:hover:before {
