@@ -64,7 +64,11 @@ import "../styles/global.css";
 
           nav {
             padding: 0;
-            font-size: 2rem;
+            font-size: 1em;
+
+            @media (max-width: 600px) {
+              font-size: 0.8em;
+            }
 
             ul {
               text-decoration: none;
@@ -72,6 +76,7 @@ import "../styles/global.css";
               display: flex;
               gap: 1rem;
               margin: 1rem;
+              align-items: flex-end;
 
               @media (max-width: 600px) {
                 flex-direction: row;
@@ -93,11 +98,11 @@ import "../styles/global.css";
                 a {
                   text-decoration: none;
                   color: inherit;
-                  font-size: 1.5rem;
+                  font-size: 1.5em;
                   position: relative;
 
                   &.home {
-                    font-size: 2rem;
+                    font-size: 2em;
                     font-family: "SpaceMonoBold";
                     width: 500px;
                   }

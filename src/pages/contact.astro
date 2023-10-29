@@ -5,6 +5,14 @@ import Form from "../components/Form/Form";
 
 <Layout>
   <div class="content" slot="body">
+    <div class="text">
+      <p>Let's work together!</p>
+      <p>You can reach me via email at:</p>
+      <p><a href="mailto:antoine.ando@gmail.com">antoine.ando@gmail.com</a></p>
+      <br />
+      <p class="desktop">Or you can use the form aside</p>
+      <p class="mobile">Or you can use the form below</p>
+    </div>
     <Form client:load />
   </div>
 </Layout>
@@ -26,9 +34,37 @@ import Form from "../components/Form/Form";
 
 <style lang="scss">
   .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    gap: 20px;
+    justify-items: center;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+
+    .text {
+      padding-block: 40px;
+      line-height: 1.4em;
+      font-size: 1.1em;
+
+      a {
+        color: black;
+      }
+
+      .mobile {
+        display: none;
+        @media (max-width: 900px) {
+          display: block;
+        }
+      }
+      .desktop {
+        display: block;
+        @media (max-width: 900px) {
+          display: none;
+        }
+      }
+    }
 
     .row {
       display: flex;
