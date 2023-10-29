@@ -1,0 +1,99 @@
+
+
+.form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2rem;
+    border: solid white 5px;
+    width: -webkit-fill-available;
+    max-width: 600px;
+    position: relative;
+    border-radius: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+
+    .input {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      label {
+      }
+
+      textarea {
+        all: unset;
+        background-color: white;
+        padding: 5px;
+        padding-top: 10px;
+        min-height: 100px;
+      }
+
+      input {
+        all: unset;
+        background-color: white;
+        padding: 5px;
+      }
+    }
+
+    button {
+      all: unset;
+      background-color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+
+    .formOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        backdrop-filter: grayscale(1) blur(2px);
+        animation: fade 0.4s;
+        
+    }
+
+    .successFrame {
+        position: absolute;
+        top: 50%;  /* position the top  edge of the element at the middle of the parent */
+        left: 50%; /* position the left edge of the element at the middle of the parent */
+    
+        border-radius: 100%;
+        transform: translate(-50%, -50%);
+        background: white;
+
+        animation: grow 1s;
+        animation-fill-mode: forwards;
+
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        p {
+            width: 1000px;
+            text-align: center;
+        }
+
+    }
+  }
+  @keyframes fade {
+    from {opacity: 0}
+    to {opacity: 1}
+  }
+
+  @keyframes grow {
+    from {
+        width: 0%;
+        height: 0%;
+    }
+    to {
+        width: 200%;
+        height: 200%;
+    }
+  }
