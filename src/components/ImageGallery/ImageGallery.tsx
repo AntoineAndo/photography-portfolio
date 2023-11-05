@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import CategoryPill from "../CategoryPill/CategoryPill";
 import "./ImageGallery.scss";
 import useSWR from "swr";
 import fetch from "unfetch";
 import { createClient } from "@sanity/client";
+import { navigate } from "astro:transitions/client";
 
 function ImageGallery() {
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
     undefined
   );
+
+  const [clickedImage, setClickedImage] = useState<string>();
 
   const [numberColumns, setNumberColumns] = useState<number>(1);
 
@@ -92,6 +96,14 @@ function ImageGallery() {
     setSelectedCategory(value != "x" ? value : undefined);
   };
 
+  useEffect(() => {
+    if (!clickedImage) {
+      return;
+    }
+    //@ts-ignore
+    navigate(`/image/${clickedImage}`);
+  }, [clickedImage]);
+
   const renderColumns = useCallback(() => {
     const cols = [];
     for (let j = 0; j < numberColumns; j++) {
@@ -100,12 +112,16 @@ function ImageGallery() {
           {images?.map(({ title, imageUrl, slug }: any, i: number) => {
             if (i % numberColumns == j) {
               return (
-                <a href={`/image/${slug}`}>
+                <a href={`/image/${slug}`} rel="prefetch">
                   <img
                     src={`${imageUrl}?w=1000`}
                     alt={title}
                     loading="lazy"
-                    onLoad={(e: any) => {}}
+                    className={clickedImage == slug ? "clicked" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setClickedImage(slug);
+                    }}
                   />
                 </a>
               );
@@ -116,7 +132,7 @@ function ImageGallery() {
     }
 
     return cols;
-  }, [images, numberColumns]);
+  }, [images, numberColumns, clickedImage]);
 
   // const renderColumns = () => {
   // };
